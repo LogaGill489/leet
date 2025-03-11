@@ -1,7 +1,30 @@
 #include <iostream>
 #include <cstring>
+#include <vector>
 using namespace std;
 
+class slidingWindow {
+    public:
+        int numberOfSubstrings(string s) {
+            vector<int> count(3, 0);
+            int left = 0, right = 0, total = 0;
+            int n = s.length();
+    
+            while (right < n) {
+                count[s[right] - 'a']++;
+                while (count[0] > 0 && count[1] > 0 && count[2] > 0) {
+                    total += n - right;
+                    count[s[left] - 'a']--;
+                    left++;
+                }
+                right++;
+            }
+    
+            return total;
+        }
+    };
+
+//This solution uses recursion to solve, however exceeds the memory usage limit on leetcode
 class Solution {
     public:
         int recursNum(string s, int start, int end, int tot) {
@@ -36,7 +59,9 @@ class Solution {
 
 int main() {
     Solution sol;
+    slidingWindow slidingWindow;
     string s = "abcabc";
     cout << sol.numberOfSubstrings(s) << endl;
+    cout << slidingWindow.numberOfSubstrings(s) << endl;
     return 0;
 }
