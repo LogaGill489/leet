@@ -12,10 +12,13 @@ class Solution {
                     switch (s[i]) {
                         case 'a':
                             check[0] = true;
+                            break;
                         case 'b':
                             check[1] = true;
+                            break;
                         case 'c':
                             check[2] = true;
+                            break;
                     }
                     if (check[0] && check[1] && check[2]) {
                         tot++;
